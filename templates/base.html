@@ -26,9 +26,11 @@
 		<h1 id="head"><a href="/"><span>Ann Arbor Area</span> Government Document Repository</a></h1>
 			
 		<div id="page">
-			
 			<ul id="nav">
-				{% block nav %}{% endblock %}			
+				{% block nav-home %}<li id="home"><a href="/">Home</a></li>{% endblock %}
+				{% block nav-add %}<li><a href="/add" class="selected">Submit a document</a></li>{% endblock %}
+				{% block nav-about %}<li><a href="/about">About</a></li>{% endblock %}
+
 			</ul>
 		
 			<div id="container">

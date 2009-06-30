@@ -1,9 +1,7 @@
 {% extends "base.html" %}
 
-{% block nav %}
-<li id="home"><a href="/">Home</a></li>
+{% block nav-add %}
 <li><a href="/add" class="selected">Submit a document</a></li>
-<li><a href="/about">About</a></li>
 {% endblock %}
 
 
@@ -21,9 +19,13 @@
 		{% for form in fileform.forms %}
 			{{ form.as_p }}
 		{% endfor %}
+		<a id="add-another">add another file</a><br />
 		
 		<input type="submit" value="Submit" />
 	</form>
+{% endblock %}
+
+{% block css %}
 {% endblock %}
 
 {% block jquery %}
@@ -32,4 +34,33 @@
 	$('textarea').autogrow();
 
 	$("#id_entries-0-entity").autocompleteArray({{ entities|safe }}); 
+	
+	var prefix = "id_files-"; // prefix for file forms
+	var suffix = "-theFile"
+	
+	var i = 1; // number of file forms shown
+	var num_forms = 2; // the number of file forms total. 
+	
+	$(document).ready(function() {
+		
+		for(hide_i = i; hide_i <= num_forms; hide_i++) {
+			id_to_hide = "#" + prefix + i + suffix;
+			jQuery(id_to_hide).parent().hide();	
+		}
+		
+		
+		jQuery("#add-another").click(function() {
+			id_to_show = "#" + prefix + i + suffix;
+			jQuery(id_to_show).parent().show();
+			
+			// remove the link if you cannot add more files
+			// (  should make this friendlier -- a la 
+			//   'email large collections to ...' )
+			if(i == 10){
+				jQuery("#add-another").hide();
+			}		
+   		});
+ 	});
+	
+	
 {% endblock %}
