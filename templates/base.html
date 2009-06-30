@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title></title>
+		<style type="text/css" media="screen">
+			table { border-collapse: separate; border-spacing: 0; } caption, th, td { text-align: left; font-weight: normal; } * { margin:0; padding:0; ;}
+			
+			body { font-family:Cambria, Times, serif; background:#eee url(/templates/fingOwl.png) no-repeat -10px 12px; font-size:1.1em; }
+			
+			#page { line-height:1.5; padding:20px 20px 20px 20px; background:white; width:920px; margin:0px auto; clear:both; overflow:hidden; }
+				#container { width:700px; float:right;}
+				#nav { border-bottom:0px none; width:200px; overflow: hidden; float:left; font-size:1.1em; }
+				#nav li {  text-indent:0px; list-style:none; }
+					#nav a { display:block; border:0px none; }
+					#nav .selected a { background:white;  }
+
+			
+			a { color:#036; text-decoration:none; border-bottom:1px dotted #036; }
+				a:hover { color:#360; border-bottom:1px solid #360; }
+				
+				
+			form input, form textarea, th, .status, h1 span, .ac_results, h2, .errorlist li  { font-family: Optima, 'Lucida Grande', Helvetica, Calibri, Arial, sans-serif; }
+				th { color:#333; border-bottom:1px solid #eee; padding-right:10px; }
+			tbody td { border-bottom:.5em solid white; }
+		
+			h1, h2, h3, h4, h5, h6 { font-weight:normal; }
+				#container h1 { line-height:1em!important; margin-bottom:.25em ;  }
+		
+			
+			h1#head { font-size:36px; font-weight:normal;   width:960px; margin:0px auto; padding-bottom:20px; padding-left:20px; }
+				h1#head a { background:#eee; margin-right:740px; display:block;  padding-top:20px;  border-bottom:0px none; color:#360; }
+					h1#head a:hover { color:#036; }
+				h1#head span { font-size:15px; }
+			
+			/* homepage list */
+			.rlist { width:100%; }
+			td.title, td.date, td.attachments, td.poster { border-right:1.5em solid white; }
+			.status { border-right:.75em solid white; }
+				.status span { display:block; width:10px; height:10px; overflow:hidden;  text-indent:-1000px; margin-top:10px; }
+				td .filled { background:#360; }
+				.denied { background:red; }
+				.denied_part { background:orange; }
+				
+			/* individual page */
+			.info { overflow:hidden; clear:both; }
+				.info div { width:220px; margin-right:13px; float:left;}
+				.info h2 { font-size:.9em; border-top:1px solid #eee;}
+			
+			
+			/* submission page */
+			form { 	}
+				form input, form textarea { font-size:1em; }
+				form p { margin-bottom:12px; overflow:hidden; clear:both; }
+				form p span { display:block; margin-right:110px; line-height:1.1; font-size:.9em; margin-bottom:5px; }
+				#id_entries-0-title { margin-bottom:10px; width:460px;  font-size:1.2em;}
+				
+				textarea { display:block; background:#fff url(/templates/images/lines.gif); line-height:22px; min-height:176px; width:580px; clear:left; border:1px solid #ccc; padding:0px 4px 0px 4px;}
+				p input { border:0px none; border-bottom:1px dashed black; }
+				label { width:130px; display:block; float:left; }
+				
+				.ui-datepicker-calendar, .ui-datepicker-header { background:#eee; padding:8px; }
+				.ui-datepicker-calendar tbody td { border-bottom:0px none; padding:2px 5px 2px 5px; }
+				.ui-datepicker-next { float:right; cursor:pointer;  }
+				.ui-datepicker-prev { float:left; cursor:pointer; }
+				.ui-datepicker-title { clear:both; font-weight:bold; }
+				
+				.errorlist li { list-style:none; color:#f70; padding:3px; line-height:1em; width:auto; margin-top:15px; font-size:.9em; text-transform:uppercase;}
+			
+				.ac_results { padding: 0px; border: 1px solid WindowFrame; background-color: Window; overflow: hidden; }	
+				.ac_results ul { width: 100%; list-style-position: outside; list-style: none; padding: 0; margin: 0; }
+
+				.ac_results iframe { display:none;/*sorry for IE5*/ display/**/:block;/*sorry for IE5*/ position:absolute; top:0; left:0; z-index:-1; filter:mask(); width:3000px; height:3000px; }
+
+	 			.ac_results li { margin: 0px; padding: 2px 5px; cursor: pointer; display: block; width: 100%;  overflow: hidden; }
+	 			.ac_loading { }
+	 			.ac_over { background-color: #ffe; color: black; }
+
+
+
+			
+			
+		</style>
+		
+		<script src="/templates/js/jquery-1.3.2.min.js"></script>
+		<script src="/templates/js/jquery-ui-1.7.2.custom.min.js"></script>
+		<script src="/templates/js/jquery.autogrow.js"></script>
+		<script src="/templates/js/jquery.autocomplete.js"></script>
+		
+		
+		<script type="text/javascript">
+			jQuery(function() {
+				{% block jquery %}
+				{% endblock %}
+            });
+            	
+		</script>
+	</head>
+	<body>
+		<h1 id="head"><a href="/"><span>Ann Arbor Area</span> Government Document Repository</a></h1>
+			
+		<div id="page">
+			
+			<ul id="nav">
+				{% block nav %}{% endblock %}			
+			</ul>
+		
+			<div id="container">
+			
+				{% block content %}{% endblock %}			
+			
+			
+			</div>
+			<div style="clear:both"></div>
+		</div>
+	</body>
+</html>

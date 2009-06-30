@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title></title>
+		<style type="text/css" media="screen">
+			table {	border-collapse: separate; border-spacing: 0; }
+			caption, th, td { text-align: left; font-weight: normal; }
+		
+			* { margin:0; padding:0; ;}
+			body { font-family:Cambria, Times, serif; background:#eee url(fingOwl.png) no-repeat -10px 12px; font-size:1.1em; }
+			
+			#nav, #container { width:920px; margin:0px auto; clear:both; }
+				#container { line-height:1.5; padding:20px 20px 20px 20px; background:white;  bborder:1px solid #aaa; border-width:0px 1px 1px 1px;}
+				#nav { bborder:1px solid #aaa; border-bottom:0px none; width:960px; background:#ccc; overflow: hidden; }
+				#nav li { display:inline; float:left; text-indent:0px; list-style:none; }
+					#nav a { display:block; padding:15px; border:0px none;  bbackground:#ddd; }
+					#nav .selected a { background:white; }
+
+			
+			a { color:#036; text-decoration:none; border-bottom:1px dotted #036; }
+				a:hover { color:#360; border-bottom:1px solid #360; }
+				
+			#nav, th, .status, h1 span { font-family: Helvetica, 'Lucida Grande', Calibri, arial, sans-serif; font-size:.9em; }
+				th { color:#333; border-bottom:1px solid #eee; }
+			tbody td { border-bottom:.5em solid white; }
+
+			
+			
+			h1 { font-size:24px; font-weight:normal; padding-top:60px;  width:960px; margin:0px auto; padding-bottom:20px; }
+				h1 span { display:block; mmargin-right:400px; font-size:16px;}
+			
+			.title, .date, .attachments, .poster { border-right:1.5em solid white; }
+			.status { border-right:1em solid white;   }
+				.status span { display:block; width:10px; height:10px; overflow:hidden;  text-indent:-1000px; margin-top:2px; }
+				.filled { background:#360; }
+				.denied { background:red; }
+				.denied_part { background:orange; }
+		</style>
+	</head>
+	<body>
+		<h1><span>Ann Arbor Area</span> Government<br> Documents<br> Repository</h1>
+		
+		<ul id="nav">
+			<li id="home" class="selected"><a href="#">Home</a></li>
+			<li><a href="#">Submit a document</a></li>
+			<li><a href="#">About</a></li>
+		</ul>
+		
+		<div id="container">
+			
+			{% block content %}{% endblock %}
+		    
+			
+			
+			
+			
+			
+		</div>
+	</body>
+</html>

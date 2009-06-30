@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block nav %}
+<li id="home"><a href="/">Home</a></li>
+<li><a href="/add" class="selected">Submit a document</a></li>
+<li><a href="/about">About</a></li>
+{% endblock %}
+
+
+
+{% block content %}
+	<h1>Submit a thing</h1>
+	<form enctype="multipart/form-data" action="" method="post">
+		
+		{{ entryform.management_form }} 
+		{{ fileform.management_form }} 
+		{% for form in entryform.forms %}
+			{{ form.as_p }}
+		{% endfor %}
+		
+		{% for form in fileform.forms %}
+			{{ form.as_p }}
+		{% endfor %}
+		
+		<input type="submit" value="Submit" />
+	</form>
+{% endblock %}
+
+{% block jquery %}
+	jQuery("#id_entries-0-date_filed").datepicker({ dateFormat: 'mm/dd/yy' });
+	jQuery("#id_entries-0-date_requested").datepicker({ dateFormat: 'mm/dd/yy' });
+	$('textarea').autogrow();
+
+	$("#id_entries-0-entity").autocompleteArray({{ entities|safe }}); 
+{% endblock %}

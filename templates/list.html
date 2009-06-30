@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block nav %}
+<li id="home" class="selected"><a href="/">Home</a></li>
+<li><a href="/add">Submit a document</a></li>
+<li><a href="/about">About</a></li>
+{% endblock %}
+
+
+
+{% block content %}
+
+{{header}}
+
+<table class="rlist" cellspacing="0">
+	<thead>
+		<tr>
+			<th></th>
+			<th>Recent documents</th>
+			<th>Added</th>
+			<th>Files</th>
+			<th>From</th>
+		</tr>
+	</thead>
+	
+	<tbody>
+		
+		{% for entry in entries %}
+		<tr>
+			<td class="status" valign="top">
+				<span class="{{ entry.status|lower }}">{{ entry.status }}</span>
+			</td>
+			<td class="title"><a href="/doc/{{ entry.id }}">{{ entry.title }}</a></td>
+			<td class="date">{{ entry.date_posted|date:"F j, Y" }}</td>
+			<td class="attachments">{{ numattachments }}</td>
+			<td class="poster">{{ entry.agency }}</td>
+		</tr>
+		{% endfor %}
+		
+				
+		
+	</tbody>
+
+</table>
+{% endblock %}
