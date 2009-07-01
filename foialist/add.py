@@ -33,24 +33,23 @@ class EntryForm(ModelForm):
     # ======================
 def add(request):
     
-   # EntryFormSet = modelformset_factory(Entry, exclude = ('slug', 'show', 'date_posted'), entity = forms.CharField())
-    EntryFormSet = modelformset_factory(Entry, form=EntryForm, exclude = ('slug', 'show', 'date_posted', 'poster_slug'))
-    
+   
+    EntryFormSet = modelformset_factory(Entry, form=EntryForm, exclude = ('slug', 'show', 'date_posted', 'poster_slug'), extra=0)
     FileFormSet = modelformset_factory(File, form=FileForm, exclude = ('belongs_to'), extra=2)
     
-    # DATA IN
+    
     if request.method == "POST":
+        
+        # create formset instances from the data
         entry_formset = EntryFormSet(request.POST, request.FILES, prefix='entries')
         file_formset  = FileFormSet(request.POST, request.FILES, prefix='files')
         
         if entry_formset.is_valid() and file_formset.is_valid():
             
             # entry_formset.save()
-            # Changes entity from a string to an Entity object.
-            # Creates a new Entity in the DB if the string doesn't match a current entity.
             
-            # entry_formset.clean()
-    
+            # Changes entity from a string to an Entity object.
+            # Creates a new Entity in the DB if the string doesn't match a current entity.    
             entity_name = request.POST['entries-0-entity']
             try:
                 entity = Entity.objects.get(name=entity_name)
@@ -59,20 +58,24 @@ def add(request):
                 entity.slug = slugify(entity.name)
                 entity.save()
                 
-                
-            # This uses some annoying trickery to go around the modelformset, because I can't 
-            #     figure out how to access modelformset values directly before saving.
-            # Will be fairly prone to breakage from naming scheme changes.     
+            '''  
+            Here I use some ugly trickery to go around the modelformset, because I can't 
+            figure out how to access modelformset values directly before saving.
+             Will be fairly prone to breakage from naming scheme changes.     
+            '''
             
+           # doesn't work: 
            # entry_formset['entries-0-entity'] = entity
-            
             
           # this doesn't work either: 
             request.POST['entries-0-entity'] = entity
             entry_formset = EntryFormSet(request.POST, request.FILES, prefix='entries')
             entry = entry_formset.save( commit=False)
             
+            
+            # fill out basic meta info:
             entry.date_posted = datetime.datetime.now() 
+            # not caring about unqiue slugs yet:
             entry.slug = slugify(entry_formset.title)
             entry.poster_slug = slugify(entry_formset.poster)
             
@@ -81,7 +84,6 @@ def add(request):
             
             entry.save()
             
-                
                 
             # for file_form in file_formset:
                 # run some code
