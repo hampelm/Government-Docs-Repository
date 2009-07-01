@@ -42,7 +42,9 @@ class Entry(models.Model):
          )
     date_posted = models.DateTimeField(auto_now=True)
     
+    #should I do a separate table for submitters? I don't think so
     poster = models.CharField("Your name", max_length=100)
+    poster_slug = models.SlugField()
     email  = models.EmailField("Your email")
     
     show = models.BooleanField()

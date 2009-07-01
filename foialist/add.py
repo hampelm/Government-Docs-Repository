@@ -1,6 +1,8 @@
 from django.shortcuts import render_to_response
-from django.template.loader import get_template
+
 from django.template import Context
+from django.template.defaultfilters import slugify
+from django.template.loader import get_template
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 
 from django import forms
@@ -9,6 +11,7 @@ from django.forms.models import modelformset_factory
 
 from foialist.models import *
 from foialist.helpers import *
+
 
 
 class FileForm(ModelForm):
@@ -23,7 +26,7 @@ class EntryForm(ModelForm):
     
     class Meta:
         model = Entry
-        exclude = ('slug', 'show', 'date_posted')
+        exclude = ('slug', 'poster_slug', 'show', 'date_posted')
 
 
     # SUBMIT A DOCUMENT
@@ -31,7 +34,7 @@ class EntryForm(ModelForm):
 def add(request):
     
    # EntryFormSet = modelformset_factory(Entry, exclude = ('slug', 'show', 'date_posted'), entity = forms.CharField())
-    EntryFormSet = modelformset_factory(Entry, form=EntryForm, exclude = ('slug', 'show', 'date_posted'))
+    EntryFormSet = modelformset_factory(Entry, form=EntryForm, exclude = ('slug', 'show', 'date_posted', 'poster_slug'))
     
     FileFormSet = modelformset_factory(File, form=FileForm, exclude = ('belongs_to'), extra=2)
     
@@ -52,7 +55,9 @@ def add(request):
             try:
                 entity = Entity.objects.get(name=entity_name)
             except Entity.DoesNotExist:
-                entity = Entity(name=entity_name).save()
+                entity = Entity(name=entity_name)
+                entity.slug = slugify(entity.name)
+                entity.save()
                 
                 
             # This uses some annoying trickery to go around the modelformset, because I can't 
@@ -68,6 +73,8 @@ def add(request):
             entry = entry_formset.save( commit=False)
             
             entry.date_posted = datetime.datetime.now() 
+            entry.slug = slugify(entry_formset.title)
+            entry.poster_slug = slugify(entry_formset.poster)
             
             # show will be used for moderation (to remove questionable documents)
             entry.show = True

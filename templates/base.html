@@ -29,6 +29,11 @@
 			<ul id="nav">
 				{% block nav-home %}<li id="home"><a href="/">Home</a></li>{% endblock %}
 				{% block nav-add %}<li><a href="/add" class="selected">Submit a document</a></li>{% endblock %}
+				
+				{% block nav-browse-submitter %}<li><a href="/submitter" class="selected">Browse by submitter</a></li>{% endblock %}
+				
+				{% block nav-browse-origin %}<li><a href="/origin" class="selected">Browse by origin</a></li>{% endblock %}
+				
 				{% block nav-about %}<li><a href="/about">About</a></li>{% endblock %}
 
 			</ul>

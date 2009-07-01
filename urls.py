@@ -9,7 +9,18 @@ urlpatterns = patterns('',
     ('^add/$', add),
     ('^submit/thanks/$', thanks),
     (r'^doc/(\d+)/$', page_by_id),
-    (r'^source/(\d+)/$', source),
+    
+ #  (r'^created/$', by_creation_date),
+ #  (r'^submitted/$', by_submission_date),
+    
+    
+    (r'^origin/$', origins),
+    (r'^origin/(?P<slug>[-\w]+)/$', by_origin),
+    
+    (r'^submitter/$', posters),
+    (r'^submitter/(?P<slugfield>[-\w]+)/$', by_poster),
+    
+    
     
     (r'^admin/(.*)', admin.site.root),
     (r'^templates/(?P<path>.*)$', 'django.views.static.serve',
