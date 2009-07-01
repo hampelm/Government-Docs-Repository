@@ -18,7 +18,7 @@ urlpatterns = patterns('',
     (r'^origin/(?P<slug>[-\w]+)/$', by_origin),
     
     (r'^submitter/$', posters),
-    (r'^submitter/(?P<slugfield>[-\w]+)/$', by_poster),
+    (r'^submitter/(?P<slug>[-\w]+)/$', by_poster),
     
     
     

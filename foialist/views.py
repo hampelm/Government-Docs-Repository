@@ -81,11 +81,9 @@ def by_poster(request, slug):
     # takes a submitter slug
     # returns all documents from that submitter.
 
-    entries = Entry.objects.filter(show=True, agency = sourceid).order_by("-date_posted")
-    headline = Agency.objects.get(id=sourced).name
+    entries = Entry.objects.filter(show=True, poster_slug = slug).order_by("-date_posted")
     return render_to_response('list.html', {'entries': entries, })
     
-        
     
     # DISPLAY A PAGE BY ID
     # ======================    
